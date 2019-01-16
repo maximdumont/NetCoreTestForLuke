@@ -1,0 +1,35 @@
+﻿@using CodingTest.Services.GradesService
+@{
+    ViewData["Title"] = "Index";
+}
+
+@inject IGradesService GradesService
+<p markdown>
+# LINQ
+
+In this example, use LINQ queries to get the correct data in the `LinqController` from the `GradeList` object to return the following:
+
+    * Average Grade Percentage for Classs
+    * How many students received each letter grade
+    * A list of students ordered by their number grade descending (Grade - FirstName LastName)
+</p>
+
+<h4>Average Grade</h4>
+<p>@GradesService.GetAverage()</p>
+
+<h4>List of Grades and Number of Students</h4>
+<p>@foreach (var resultGroup in GradesService.GetGroupingsByLetterGrade())
+   {
+       <div>
+           @resultGroup.LetterGrade - @resultGroup.Count
+       </div>
+   }</p>
+
+<h4>List of Students Ordered By Grades Descending</h4>
+<p>@foreach (var student in GradesService.GetStudentsListGroupedByGrade())
+   {
+       <div>
+           @student.NumberGrade - @student.FirstName -  @student.LastName
+       </div>
+   }</p>
+
